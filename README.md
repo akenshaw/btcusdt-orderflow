@@ -1,3 +1,4 @@
 # Visualizes orderbook and market trading activity using PyQt and PyQtGraph.
-https://user-images.githubusercontent.com/63060680/279361123-66b1c231-3c74-4023-952c-d173515ae428.png
-https://user-images.githubusercontent.com/63060680/279361110-80402e7f-4e24-4d3a-ace4-bca92523197b.png
+![image](https://github.com/akenshaw/btcusdt-orderflow/assets/63060680/43b468b1-1f3e-4f74-8b72-22eeafc723c2)
+![image](https://github.com/akenshaw/btcusdt-orderflow/assets/63060680/4dfc2ccf-cdae-4fe1-8731-0e059b1522a2)
+
