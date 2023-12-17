@@ -63,36 +63,26 @@ async def update_order_book(bids, asks, new_bids, new_asks):
     new_bids = new_bids[new_bids['price'] >= best_bid_price*0.999]
     new_asks = new_asks[new_asks['price'] <= best_bid_price*1.001]
 
-    # Update bids
     _, idx_order, idx_new = np.intersect1d(bids['price'], new_bids['price'], return_indices=True)
     valid_idx_new = idx_new[idx_new < len(new_bids)]
     valid_idx_order = idx_order[idx_new < len(new_bids)]
     bids['quantity'][valid_idx_order] = new_bids['quantity'][valid_idx_new]
 
-    # Add new bid price levels
     new_price_levels = np.setdiff1d(new_bids['price'], bids['price'])
     bids = np.concatenate((bids, new_bids[np.isin(new_bids['price'], new_price_levels)]))
 
-    # Remove price levels with quantity 0 in bids
     bids = bids[bids['quantity'] != 0]
-
-    # Sort bids by price in descending order
     bids = np.sort(bids, order=['price'])[::-1]
 
-    # Update asks
     _, idx_order, idx_new = np.intersect1d(asks['price'], new_asks['price'], return_indices=True)
     valid_idx_new = idx_new[idx_new < len(new_asks)]
     valid_idx_order = idx_order[idx_new < len(new_asks)]
     asks['quantity'][valid_idx_order] = new_asks['quantity'][valid_idx_new]
 
-    # Add new ask price levels
     new_price_levels = np.setdiff1d(new_asks['price'], asks['price'])
     asks = np.concatenate((asks, new_asks[np.isin(new_asks['price'], new_price_levels)]))
 
-    # Remove price levels with quantity 0 in asks
     asks = asks[asks['quantity'] != 0]
-
-    # Sort asks by price in ascending order
     asks = np.sort(asks, order=['price'])
 
     return bids, asks
